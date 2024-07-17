@@ -1,3 +1,5 @@
+#************************************* PULL, COMMIT, COMMIT, PUSH EVERY TIME YOU EDIT *******************************
+
 ## read in starter code
 
 source("C:\\SMT\\2024_SMT_Data_Challenge\\2024_SMT_Data_Challenge\\SMT_Data_starter.R")
