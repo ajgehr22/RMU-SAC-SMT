@@ -45,6 +45,21 @@ shortstop_involved <- game_events %>%
          player_position == 6) %>% 
   collect()
 
+shortstop_involved$player_ID <- 0
+
+# add shortstop ID to game info
+
+#*************** DOES NOT WORK ***************#
+
+for(i in 1:length(shortstop_involved$game_str)){
+  for(j in 1:length(game_info_SS)){
+    if(game_info_SS$game_str[j] == shortstop_involved$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      shortstop_involved$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
 ############## NEXT STEPS ##############
 # 
 # Split plays into routine, intermediate, stellar
