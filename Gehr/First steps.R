@@ -62,6 +62,7 @@ for(i in 1:length(shortstop_involved$game_str)){
 
 ############## NEXT STEPS ##############
 # 
+# Find all plays where SS or 2B were involved
 # Split plays into routine, intermediate, stellar
 # Look at fielding percentage across levels
 # Investigate improvements from entire system from year to year
