@@ -61,7 +61,7 @@ shortstop_involved_1A <- game_events %>%
 
 shortstop_involved_1A$player_ID <- 0
 
-# add shortstop ID to game info
+# add shortstop ID to game info for 1A
 
 for(i in 1:340){
   for(j in 1:length(game_info_SS$game_str)){
