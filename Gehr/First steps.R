@@ -19,7 +19,7 @@ game_info_SS <- game_info %>%
   collect()
 
 SS_ids <- unique(game_info_SS$shortstop)
-SS_ids <- SS_ids[-1]
+SS_ids <- na.omit(SS_ids)
 SS_ids <- SS_ids[SS_ids < 1000]
 length(SS_ids)
 print(SS_ids)
@@ -33,7 +33,7 @@ game_info_2B <- game_info %>%
   collect()
 
 SecondB_ids <- unique(game_info_2B$second_base)
-SecondB_ids <- SecondB_ids[-1]
+SecondB_ids <- na.omit(SecondB_ids)
 SecondB_ids <- SecondB_ids[SecondB_ids < 1000]
 length(SecondB_ids)
 print(SecondB_ids)
@@ -42,14 +42,14 @@ game_info_2B <- na.omit(game_info_2B)
 
 # filter for plays in 1A first day 1883 where the shortstop is involved ***** PRACTICE
 
-shortstop_involved_practice <- game_events %>% 
-  filter(Season == "Season_1883",
-         HomeTeam == "Home1A",
-         Day == "day_001",
-         player_position == 6) %>% 
-  collect()
+#shortstop_involved_practice <- game_events %>% 
+ # filter(Season == "Season_1883",
+  #       HomeTeam == "Home1A",
+   #      Day == "day_001",
+    #     player_position == 6) %>% 
+  #collect()
 
-shortstop_involved_practice$player_ID <- 0
+#shortstop_involved_practice$player_ID <- 0
 
 # filter for all 1A plays 1883 where the shortstop is involved
 
@@ -82,6 +82,8 @@ for(i in 341:length(shortstop_involved_1A$game_str)){
     }
   }
 }
+
+# Repeat for 2A, 3A, 4A as well as 1884
 
 ############## NEXT STEPS ##############
 # 
