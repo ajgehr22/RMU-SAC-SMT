@@ -83,7 +83,39 @@ for(i in 341:length(shortstop_involved_1A$game_str)){
   }
 }
 
-# Repeat for 2A, 3A, 4A as well as 1884
+# filter for all 2A plays 1883 where the shortstop is involved
+
+shortstop_involved_2A <- game_events %>% 
+  filter(Season == "Season_1883",
+         HomeTeam == "Home2A",
+         player_position == 6) %>% 
+  collect()
+
+shortstop_involved_2A$player_ID <- 0
+
+# add shortstop ID to game info for 1A
+
+for(i in 1:136){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_2A$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 137:length(shortstop_involved_2A$game_str)){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_2A$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+# Repeat for 3A, 4A as well as 1884
 
 ############## NEXT STEPS ##############
 # 
