@@ -53,31 +53,31 @@ game_info_2B <- na.omit(game_info_2B)
 
 # filter for all 1A plays 1883 where the shortstop is involved
 
-shortstop_involved_1A <- game_events %>% 
+shortstop_involved_1A_83 <- game_events %>% 
   filter(Season == "Season_1883",
          HomeTeam == "Home1A",
          player_position == 6) %>% 
   collect()
 
-shortstop_involved_1A$player_ID <- 0
+shortstop_involved_1A_83$player_ID <- 0
 
 # add shortstop ID to game info for 1A
 
 for(i in 1:340){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_1A$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
         
-        shortstop_involved_1A$player_ID[i] <- game_info_SS$shortstop[j]
+        shortstop_involved_1A_83$player_ID[i] <- game_info_SS$shortstop[j]
         
     }
   }
 }
 
-for(i in 341:length(shortstop_involved_1A$game_str)){
+for(i in 341:length(shortstop_involved_1A_83$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_1A$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
       
-      shortstop_involved_1A$player_ID[i] <- game_info_SS$shortstop[j]
+      shortstop_involved_1A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
     }
   }
@@ -85,37 +85,308 @@ for(i in 341:length(shortstop_involved_1A$game_str)){
 
 # filter for all 2A plays 1883 where the shortstop is involved
 
-shortstop_involved_2A <- game_events %>% 
+shortstop_involved_2A_83 <- game_events %>% 
   filter(Season == "Season_1883",
          HomeTeam == "Home2A",
          player_position == 6) %>% 
   collect()
 
-shortstop_involved_2A$player_ID <- 0
+shortstop_involved_2A_83$player_ID <- 0
 
-# add shortstop ID to game info for 1A
+# add shortstop ID to game info for 2A
 
 for(i in 1:136){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_2A$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
       
-      shortstop_involved_2A$player_ID[i] <- game_info_SS$shortstop[j]
+      shortstop_involved_2A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
     }
   }
 }
 
-for(i in 137:length(shortstop_involved_2A$game_str)){
+for(i in 137:length(shortstop_involved_2A_83$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_2A$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
       
-      shortstop_involved_2A$player_ID[i] <- game_info_SS$shortstop[j]
+      shortstop_involved_2A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
     }
   }
 }
 
-# Repeat for 3A, 4A as well as 1884
+# filter for all 3A plays 1883 where the shortstop is involved
+
+shortstop_involved_3A_83 <- game_events %>% 
+  filter(Season == "Season_1883",
+         HomeTeam == "Home3A",
+         player_position == 6) %>% 
+  collect()
+
+shortstop_involved_3A_83$player_ID <- 0
+
+# add shortstop ID to game info for 3A
+
+for(i in 1:217){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_3A_83$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 218:length(shortstop_involved_3A_83$game_str)){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_3A_83$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+# filter for all 4A plays 1883 where the shortstop is involved
+
+shortstop_involved_4A_83 <- game_events %>% 
+  filter(Season == "Season_1883",
+         HomeTeam == "Home4A",
+         player_position == 6) %>% 
+  collect()
+
+shortstop_involved_4A_83$player_ID <- 0
+
+# add shortstop ID to game info for 4A
+
+for(i in 1:340){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_4A_83$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 341:length(shortstop_involved_4A_83$game_str)){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_4A_83$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+#TEST THESE FOR LOOPS
+# filter for all 1A plays 1884 where the shortstop is involved
+
+shortstop_involved_1A_84 <- game_events %>% 
+  filter(Season == "Season_1884",
+         HomeTeam == "Home1A",
+         player_position == 6) %>% 
+  collect()
+
+shortstop_involved_1A_84$player_ID <- 0
+
+# add shortstop ID to game info for 1A
+
+for(i in 1:358){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_1A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 359:716){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_1A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 717:1074){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_1A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 1075:length(shortstop_involved_1A_84$game_str)){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_1A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+# filter for all 2A plays 1884 where the shortstop is involved
+
+shortstop_involved_2A_84 <- game_events %>% 
+  filter(Season == "Season_1884",
+         HomeTeam == "Home2A",
+         player_position == 6) %>% 
+  collect()
+
+shortstop_involved_2A_84$player_ID <- 0
+
+# add shortstop ID to game info for 2A
+
+for(i in 1:354){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_2A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 355:708){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_2A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 709:1062){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_2A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 1063:length(shortstop_involved_2A_84$game_str)){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_2A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+# filter for all 3A plays 1884 where the shortstop is involved
+
+shortstop_involved_3A_84 <- game_events %>% 
+  filter(Season == "Season_1884",
+         HomeTeam == "Home3A",
+         player_position == 6) %>% 
+  collect()
+
+shortstop_involved_3A_84$player_ID <- 0
+
+# add shortstop ID to game info for 3A
+
+for(i in 1:324){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_3A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 325:648){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_3A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 649:972){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_3A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 973:length(shortstop_involved_3A_84$game_str)){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_3A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+# filter for all 4A plays 1884 where the shortstop is involved
+
+shortstop_involved_4A_84 <- game_events %>% 
+  filter(Season == "Season_1884",
+         HomeTeam == "Home4A",
+         player_position == 6) %>% 
+  collect()
+
+shortstop_involved_4A_84$player_ID <- 0
+
+# add shortstop ID to game info for 4A
+
+for(i in 1:366){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_4A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 367:732){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_4A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 733:1098){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_4A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
+
+for(i in 1099:length(shortstop_involved_4A_84$game_str)){
+  for(j in 1:length(game_info_SS$game_str)){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+      
+      shortstop_involved_4A_84$player_ID[i] <- game_info_SS$shortstop[j]
+      
+    }
+  }
+}
 
 ############## NEXT STEPS ##############
 # 
