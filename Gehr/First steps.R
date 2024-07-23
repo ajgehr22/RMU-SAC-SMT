@@ -15,7 +15,7 @@ source("C:\\SMT\\2024_SMT_Data_Challenge\\2024_SMT_Data_Challenge\\SMT_Data_star
 # collect unique shortstop IDs
 
 game_info_SS <- game_info %>% 
-  select(game_str, home_team, away_team, shortstop) %>% 
+  select(game_str, home_team, away_team, at_bat, shortstop) %>% 
   collect()
 
 SS_ids <- unique(game_info_SS$shortstop)
@@ -25,11 +25,13 @@ length(SS_ids)
 print(SS_ids)
 
 game_info_SS <- na.omit(game_info_SS)
+game_info_SS <- game_info_SS %>% 
+  filter(shortstop < 1000)
 
 # collect unique second basemen IDS
 
 game_info_2B <- game_info %>% 
-  select(game_str, home_team, away_team, second_base) %>% 
+  select(game_str, home_team, away_team, at_bat, second_base) %>% 
   collect()
 
 SecondB_ids <- unique(game_info_2B$second_base)
@@ -60,12 +62,13 @@ shortstop_involved_1A_83 <- game_events %>%
   collect()
 
 shortstop_involved_1A_83$player_ID <- 0
+shortstop_involved_1A_83 <- na.omit(shortstop_involved_1A_83)
 
 # add shortstop ID to game info for 1A
 
 for(i in 1:340){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_1A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_83$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_1A_83$at_bat[i]){
         
         shortstop_involved_1A_83$player_ID[i] <- game_info_SS$shortstop[j]
         
@@ -75,13 +78,16 @@ for(i in 1:340){
 
 for(i in 341:length(shortstop_involved_1A_83$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_1A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_83$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_1A_83$at_bat[i]){
       
       shortstop_involved_1A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
     }
   }
 }
+
+shortstop_involved_1A_83 <- shortstop_involved_1A_83 %>% 
+  filter(player_ID != 0)
 
 # filter for all 2A plays 1883 where the shortstop is involved
 
@@ -92,12 +98,13 @@ shortstop_involved_2A_83 <- game_events %>%
   collect()
 
 shortstop_involved_2A_83$player_ID <- 0
+shortstop_involved_2A_83 <- na.omit(shortstop_involved_2A_83)
 
 # add shortstop ID to game info for 2A
 
 for(i in 1:136){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_2A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_83$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_2A_83$at_bat[i]){
       
       shortstop_involved_2A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -107,7 +114,7 @@ for(i in 1:136){
 
 for(i in 137:length(shortstop_involved_2A_83$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_2A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_83$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_2A_83$at_bat[i]){
       
       shortstop_involved_2A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -124,12 +131,13 @@ shortstop_involved_3A_83 <- game_events %>%
   collect()
 
 shortstop_involved_3A_83$player_ID <- 0
+shortstop_involved_3A_83 <- na.omit(shortstop_involved_3A_83)
 
 # add shortstop ID to game info for 3A
 
 for(i in 1:217){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_3A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_83$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_3A_83$at_bat[i]){
       
       shortstop_involved_3A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -139,7 +147,7 @@ for(i in 1:217){
 
 for(i in 218:length(shortstop_involved_3A_83$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_3A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_83$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_3A_83$at_bat[i]){
       
       shortstop_involved_3A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -156,12 +164,13 @@ shortstop_involved_4A_83 <- game_events %>%
   collect()
 
 shortstop_involved_4A_83$player_ID <- 0
+shortstop_involved_4A_83 <- na.omit(shortstop_involved_4A_83)
 
 # add shortstop ID to game info for 4A
 
 for(i in 1:340){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_4A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_83$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_4A_83$at_bat[i]){
       
       shortstop_involved_4A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -171,7 +180,7 @@ for(i in 1:340){
 
 for(i in 341:length(shortstop_involved_4A_83$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_4A_83$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_83$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_4A_83$at_bat[i]){
       
       shortstop_involved_4A_83$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -188,12 +197,13 @@ shortstop_involved_1A_84 <- game_events %>%
   collect()
 
 shortstop_involved_1A_84$player_ID <- 0
+shortstop_involved_1A_84 <- na.omit(shortstop_involved_1A_84)
 
 # add shortstop ID to game info for 1A
 
 for(i in 1:358){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_1A_84$at_bat[i]){
       
       shortstop_involved_1A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -203,7 +213,7 @@ for(i in 1:358){
 
 for(i in 359:716){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_1A_84$at_bat[i]){
       
       shortstop_involved_1A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -213,7 +223,7 @@ for(i in 359:716){
 
 for(i in 717:1074){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_1A_84$at_bat[i]){
       
       shortstop_involved_1A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -223,13 +233,14 @@ for(i in 717:1074){
 
 for(i in 1075:length(shortstop_involved_1A_84$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_1A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_1A_84$at_bat[i]){
       
       shortstop_involved_1A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
     }
   }
 }
+
 
 # filter for all 2A plays 1884 where the shortstop is involved
 
@@ -240,12 +251,13 @@ shortstop_involved_2A_84 <- game_events %>%
   collect()
 
 shortstop_involved_2A_84$player_ID <- 0
+shortstop_involved_2A_84 <- na.omit(shortstop_involved_2A_84)
 
 # add shortstop ID to game info for 2A
 
 for(i in 1:354){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_2A_84$at_bat[i]){
       
       shortstop_involved_2A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -255,7 +267,7 @@ for(i in 1:354){
 
 for(i in 355:708){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_2A_84$at_bat[i]){
       
       shortstop_involved_2A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -265,7 +277,7 @@ for(i in 355:708){
 
 for(i in 709:1062){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_2A_84$at_bat[i]){
       
       shortstop_involved_2A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -275,7 +287,7 @@ for(i in 709:1062){
 
 for(i in 1063:length(shortstop_involved_2A_84$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_2A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_2A_84$at_bat[i]){
       
       shortstop_involved_2A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -292,12 +304,13 @@ shortstop_involved_3A_84 <- game_events %>%
   collect()
 
 shortstop_involved_3A_84$player_ID <- 0
+shortstop_involved_3A_84 <- na.omit(shortstop_involved_3A_84)
 
 # add shortstop ID to game info for 3A
 
 for(i in 1:324){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_3A_84$at_bat[i]){
       
       shortstop_involved_3A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -307,7 +320,7 @@ for(i in 1:324){
 
 for(i in 325:648){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_3A_84$at_bat[i]){
       
       shortstop_involved_3A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -317,7 +330,7 @@ for(i in 325:648){
 
 for(i in 649:972){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_3A_84$at_bat[i]){
       
       shortstop_involved_3A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -327,7 +340,7 @@ for(i in 649:972){
 
 for(i in 973:length(shortstop_involved_3A_84$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_3A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_3A_84$at_bat[i]){
       
       shortstop_involved_3A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -344,12 +357,13 @@ shortstop_involved_4A_84 <- game_events %>%
   collect()
 
 shortstop_involved_4A_84$player_ID <- 0
+shortstop_involved_4A_84 <- na.omit(shortstop_involved_4A_84)
 
 # add shortstop ID to game info for 4A
 
 for(i in 1:366){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_4A_84$at_bat[i]){
       
       shortstop_involved_4A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -359,7 +373,7 @@ for(i in 1:366){
 
 for(i in 367:732){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_4A_84$at_bat[i]){
       
       shortstop_involved_4A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -369,7 +383,7 @@ for(i in 367:732){
 
 for(i in 733:1098){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_4A_84$at_bat[i]){
       
       shortstop_involved_4A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
@@ -379,7 +393,7 @@ for(i in 733:1098){
 
 for(i in 1099:length(shortstop_involved_4A_84$game_str)){
   for(j in 1:length(game_info_SS$game_str)){
-    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000){
+    if(game_info_SS$game_str[j] == shortstop_involved_4A_84$game_str[i] & game_info_SS$shortstop[j] < 1000 & game_info_SS$at_bat[j] == shortstop_involved_4A_84$at_bat[i]){
       
       shortstop_involved_4A_84$player_ID[i] <- game_info_SS$shortstop[j]
       
