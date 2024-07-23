@@ -179,7 +179,6 @@ for(i in 341:length(shortstop_involved_4A_83$game_str)){
   }
 }
 
-#TEST THESE FOR LOOPS
 # filter for all 1A plays 1884 where the shortstop is involved
 
 shortstop_involved_1A_84 <- game_events %>% 
@@ -387,6 +386,15 @@ for(i in 1099:length(shortstop_involved_4A_84$game_str)){
     }
   }
 }
+
+#binding rows
+shortstop_overall_involvement <- bind_rows(shortstop_involved_1A_83, shortstop_involved_2A_83,
+                                           shortstop_involved_3A_83, shortstop_involved_4A_83,
+                                           shortstop_involved_1A_84, shortstop_involved_2A_84,
+                                           shortstop_involved_3A_84, shortstop_involved_4A_84)
+
+#writing the overall involvement to a new csv
+write.csv(shortstop_overall_involvement, "/Users/jknapp77/Desktop/Analytics Competitions:Research/SMT 2024/RMU_SAC_SMT/Gehr/Overall_SS_Involvement.csv")
 
 ############## NEXT STEPS ##############
 # 
