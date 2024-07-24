@@ -8,7 +8,7 @@ source("C:\\SMT\\2024_SMT_Data_Challenge\\2024_SMT_Data_Challenge\\SMT_Data_star
 
 ss_play_ids <- read.csv("C:\\SMT\\RMU-SAC-SMT\\Gehr\\Overall_SS_Involvement.csv")
 
-ss_play_ids <- ss_play_ids[, -1]
 
-ss_play_ids <- ss_play_ids %>% 
-  filter(player_ID != 0)
+
+
+
