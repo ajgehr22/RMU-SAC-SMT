@@ -122,6 +122,9 @@ for(i in 137:length(shortstop_involved_2A_83$game_str)){
   }
 }
 
+shortstop_involved_2A_83 <- shortstop_involved_2A_83 %>% 
+  filter(player_ID != 0)
+
 # filter for all 3A plays 1883 where the shortstop is involved
 
 shortstop_involved_3A_83 <- game_events %>% 
@@ -155,6 +158,9 @@ for(i in 218:length(shortstop_involved_3A_83$game_str)){
   }
 }
 
+shortstop_involved_3A_83 <- shortstop_involved_3A_83 %>% 
+  filter(player_ID != 0)
+
 # filter for all 4A plays 1883 where the shortstop is involved
 
 shortstop_involved_4A_83 <- game_events %>% 
@@ -187,6 +193,9 @@ for(i in 341:length(shortstop_involved_4A_83$game_str)){
     }
   }
 }
+
+shortstop_involved_4A_83 <- shortstop_involved_4A_83 %>% 
+  filter(player_ID != 0)
 
 # filter for all 1A plays 1884 where the shortstop is involved
 
@@ -241,6 +250,8 @@ for(i in 1075:length(shortstop_involved_1A_84$game_str)){
   }
 }
 
+shortstop_involved_1A_84 <- shortstop_involved_1A_84 %>% 
+  filter(player_ID != 0)
 
 # filter for all 2A plays 1884 where the shortstop is involved
 
@@ -295,6 +306,9 @@ for(i in 1063:length(shortstop_involved_2A_84$game_str)){
   }
 }
 
+shortstop_involved_2A_84 <- shortstop_involved_2A_84 %>% 
+  filter(player_ID != 0)
+
 # filter for all 3A plays 1884 where the shortstop is involved
 
 shortstop_involved_3A_84 <- game_events %>% 
@@ -347,6 +361,9 @@ for(i in 973:length(shortstop_involved_3A_84$game_str)){
     }
   }
 }
+
+shortstop_involved_3A_84 <- shortstop_involved_3A_84 %>% 
+  filter(player_ID != 0)
 
 # filter for all 4A plays 1884 where the shortstop is involved
 
@@ -401,6 +418,9 @@ for(i in 1099:length(shortstop_involved_4A_84$game_str)){
   }
 }
 
+shortstop_involved_4A_84 <- shortstop_involved_4A_84 %>% 
+  filter(player_ID != 0)
+
 #binding rows
 shortstop_overall_involvement <- bind_rows(shortstop_involved_1A_83, shortstop_involved_2A_83,
                                            shortstop_involved_3A_83, shortstop_involved_4A_83,
@@ -408,7 +428,7 @@ shortstop_overall_involvement <- bind_rows(shortstop_involved_1A_83, shortstop_i
                                            shortstop_involved_3A_84, shortstop_involved_4A_84)
 
 #writing the overall involvement to a new csv
-write.csv(shortstop_overall_involvement, "/Users/jknapp77/Desktop/Analytics Competitions:Research/SMT 2024/RMU_SAC_SMT/Gehr/Overall_SS_Involvement.csv")
+write.csv(shortstop_overall_involvement, "C:\\SMT\\RMU-SAC-SMT\\Gehr\\Overall_SS_Involvement.csv")
 
 ############## NEXT STEPS ##############
 # 
