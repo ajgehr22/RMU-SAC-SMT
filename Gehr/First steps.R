@@ -2,7 +2,14 @@
 
 ## read in starter code
 
+#Adam
 source("C:\\SMT\\2024_SMT_Data_Challenge\\2024_SMT_Data_Challenge\\SMT_Data_starter.R")
+
+#Josh
+source("~/Desktop/Analytics Competitions:Research/SMT 2024/2024_SMT_Data_Challenge/SMT_Data_starter.R")
+
+#Liam input your source that can load your code
+
 
 #************* Project Idea *************#
 #
