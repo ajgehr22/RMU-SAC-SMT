@@ -8,7 +8,7 @@ source("C:\\SMT\\2024_SMT_Data_Challenge\\2024_SMT_Data_Challenge\\SMT_Data_star
 #Josh
 source("~/Desktop/Analytics Competitions:Research/SMT 2024/2024_SMT_Data_Challenge/SMT_Data_starter.R")
 
-#Liam input your source that can load your code
+#Liam input your source that can load the starter code
 
 
 #************* Project Idea *************#
