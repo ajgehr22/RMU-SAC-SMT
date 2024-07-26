@@ -16,19 +16,11 @@ ss_position <- player_pos %>%
          player_position == 6) %>% 
   collect()
 
-ss_position$Keep <- 0
-
 ## reduce to get game/play pairs in ss df
 
-for(i in 1:153){
-  for(j in 1:length(ss_position$game_str)){
-    if(ss_play_ids$game_str[i] == ss_position$game_str[j] & ss_play_ids$play_id[i] == ss_position$play_id[j]){
-      
-      ss_position$Keep[j] <- "Yes"
-      
-    }
-  }
-}
+ss_play_ids$game_str <- paste(ss_play_ids$game_str, ss_play_ids$play_id, sep = "_")
+ss_position$game_str <- paste(ss_position$game_str, ss_position$play_id, sep = "_")
 
-
+ss_position <- ss_position %>% 
+  filter(game_str %in% ss_play_ids$game_str)
 
