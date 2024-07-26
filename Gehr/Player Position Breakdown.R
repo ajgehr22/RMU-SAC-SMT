@@ -8,6 +8,13 @@ source("C:\\SMT\\2024_SMT_Data_Challenge\\2024_SMT_Data_Challenge\\SMT_Data_star
 
 ss_play_ids <- read.csv("C:\\SMT\\RMU-SAC-SMT\\Gehr\\Overall_SS_Involvement.csv")
 
+## read in player position data for game and play id in ss df
+
+ss_position <- player_pos %>% 
+  filter(game_str %in% ss_play_ids$game_str,
+         play_id %in% ss_play_ids$play_id,
+         player_position == 6) %>% 
+  collect()
 
 
 
