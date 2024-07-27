@@ -53,3 +53,8 @@ ss_position$ball_pos_y <- 0
 ss_position$ball_pos_z <- 0
 
 match_vec <- match(ball_pos_plays$unique_id, ss_position$unique_id)
+num_vec <- c(1:length(match_vec))
+match_df <- data.frame(ball = num_vec, player = match_vec)
+
+ss_have_ball_info <- ss_position[match_df$player,]
+ss_no_ball_info <- ss_position[-match_df$player,]
