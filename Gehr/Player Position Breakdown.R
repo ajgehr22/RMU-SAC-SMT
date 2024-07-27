@@ -42,3 +42,14 @@ ball_pos_plays$unique_id <- paste(ball_pos_plays$game_str, ball_pos_plays$play_i
 
 ball_pos_plays <- ball_pos_plays %>% 
   filter(unique_id %in% ss_play_ids$unique_id)
+
+## vector with ball positions
+
+ss_position$unique_id <- paste(ss_position$unique_id, ss_position$timestamp, sep = "_")
+ball_pos_plays$unique_id <- paste(ball_pos_plays$unique_id, ball_pos_plays$timestamp, sep = "_")
+
+ss_position$ball_pos_x <- 0
+ss_position$ball_pos_y <- 0
+ss_position$ball_pos_z <- 0
+
+match_vec <- match(ball_pos_plays$unique_id, ss_position$unique_id)
