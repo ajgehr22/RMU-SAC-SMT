@@ -25,9 +25,20 @@ ss_position <- player_pos %>%
 
 ## reduce to get game/play pairs in ss df
 
-ss_play_ids$game_str <- paste(ss_play_ids$game_str, ss_play_ids$play_id, sep = "_")
-ss_position$game_str <- paste(ss_position$game_str, ss_position$play_id, sep = "_")
+ss_play_ids$unique_id <- paste(ss_play_ids$game_str, ss_play_ids$play_id, sep = "_")
+ss_position$unique_id <- paste(ss_position$game_str, ss_position$play_id, sep = "_")
 
 ss_position <- ss_position %>% 
-  filter(game_str %in% ss_play_ids$game_str)
+  filter(unique_id %in% ss_play_ids$unique_id)
 
+## repeat process with ball position data to 
+
+ball_pos_plays <- ball_pos %>% 
+  filter(game_str %in% ss_play_ids$game_str,
+         play_id %in% ss_play_ids$play_id) %>% 
+  collect()
+
+ball_pos_plays$unique_id <- paste(ball_pos_plays$game_str, ball_pos_plays$play_id, sep = "_")
+
+ball_pos_plays <- ball_pos_plays %>% 
+  filter(unique_id %in% ss_play_ids$unique_id)
