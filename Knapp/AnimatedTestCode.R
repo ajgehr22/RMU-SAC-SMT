@@ -1,5 +1,6 @@
 ## Load relevant libraries
 library(tidyverse) # for data cleaning, wrangling, etc
+install.packages("sportyR")
 library(sportyR) # for baseball field visualizations
 if(!require(gifski)) install.packages("gifski") # a helper package for gganimate
 library(gganimate) # to make the animated plot
