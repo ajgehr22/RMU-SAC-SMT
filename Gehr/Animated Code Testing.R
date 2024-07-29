@@ -12,12 +12,12 @@ source("SMT_Data_starter.R")
 animate_play <- function(game_id, play) {
   
   # Set the specs for the gif we want to create (lower res to make it run quicker)
-  options(gganimate.dev_args = list(width = 3, height = 3, units = 'in', res = 120))
+  options(gganimate.dev_args = list(width = 4, height = 3.5, units = 'in', res = 120))
   
   # sometimes the frames per second at different stadiums can vary (30 fps vs 50 fps)
   # this finds an even rounding interval and calculates fps from the data explicitly
   fps <- player_pos %>%
-    filter(game_str == game_id, play_id == play, player_position < 14) %>%
+    filter(game_str == game_id, play_id == play, player_position < 7) %>%
     collect() %>% 
     mutate(fps = timestamp - lag(timestamp), .by = "player_position")  %>%
     count(fps) %>% slice_max(n) %>% pull(fps)
@@ -32,7 +32,7 @@ animate_play <- function(game_id, play) {
   # Combine data into one data frame
   tracking_data <- player_pos %>%
     # start with player position data
-    filter(game_str == game_id, play_id == play, player_position < 14) %>%
+    filter(game_str == game_id, play_id == play, player_position %in% c(1:6,10:14)) %>%
     collect() %>% 
     mutate(type = if_else(player_position %in% c(10:13), "batter", "fielder"),
            position_z = NA) %>%
@@ -54,7 +54,7 @@ animate_play <- function(game_id, play) {
     mutate(frame_id = match(timestamp_adj, unique(timestamp_adj)))
   
   # make field design
-  p <-  geom_baseball(league = "MiLB") +
+  p <-  geom_baseball(league = "MiLB", display_range = "infield") +
     geom_point(data = tracking_data %>%
                  filter(type != "ball"),
                aes(x = position_x, y = position_y, fill = type),
@@ -85,5 +85,5 @@ animate_play <- function(game_id, play) {
 }
 
 # example play sequence
-animate_play("1883_003_Vis1AB_Home1A", 4)
+animate_play("1883_003_Vis1AB_Home1A", 127)
 Collapse
