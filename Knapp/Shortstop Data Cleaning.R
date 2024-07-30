@@ -43,3 +43,16 @@ ball_pos_plays$unique_id <- paste(ball_pos_plays$unique_id, ball_pos_plays$times
 
 all_plays <- ss_position %>% 
   inner_join(ball_pos_plays, by = "unique_id")
+
+all_plays = subset(all_plays, select = -c(12, 13, 14, 18, 19, 20, 21))
+
+all_plays <- all_plays |> 
+  rename(
+    game_str = game_str.x,
+    play_id = play_id.x,
+    timestamp = timestamp.x,
+    Season = Season.x,
+    HomeTeam = HomeTeam.x,
+    AwayTeam = AwayTeam.x,
+    Day = Day.x
+  )
