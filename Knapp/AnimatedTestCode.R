@@ -1,12 +1,12 @@
 ## Load relevant libraries
 library(tidyverse) # for data cleaning, wrangling, etc
-install.packages("sportyR")
+#install.packages("sportyR")
 library(sportyR) # for baseball field visualizations
 if(!require(gifski)) install.packages("gifski") # a helper package for gganimate
 library(gganimate) # to make the animated plot
 
 ## Import Data
-source("SMT_Data_starter.R")
+source("~/Desktop/Analytics Competitions:Research/SMT 2024/2024_SMT_Data_Challenge/SMT_Data_starter.R")
 
 ##  Write function to animate play sequences
 animate_play <- function(game_id, play) {
@@ -85,5 +85,5 @@ animate_play <- function(game_id, play) {
 }
 
 # example play sequence
-animate_play("1883_003_Vis1AB_Home1A", 4)
+animate_play("1883_003_Vis1AB_Home1A", 15)
 Collapse
