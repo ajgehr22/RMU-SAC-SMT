@@ -56,3 +56,5 @@ all_plays <- all_plays |>
     AwayTeam = AwayTeam.x,
     Day = Day.x
   )
+
+write.csv(all_plays, "~/Desktop/Analytics Competitions:Research/SMT 2024/RMU_SAC_SMT/Knapp/All Shortstop Plays.csv")
