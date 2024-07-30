@@ -7,6 +7,7 @@ library(gganimate) # to make the animated plot
 
 ## Import Data
 source("~/Desktop/Analytics Competitions:Research/SMT 2024/2024_SMT_Data_Challenge/SMT_Data_starter.R")
+all_SS_plays <- read.csv("~/Desktop/Analytics Competitions:Research/SMT 2024/RMU_SAC_SMT/Knapp/All Shortstop Plays.csv")
 
 ##  Write function to animate play sequences
 animate_play <- function(game_id, play) {
@@ -85,5 +86,5 @@ animate_play <- function(game_id, play) {
 }
 
 # example play sequence
-animate_play("1883_003_Vis1AB_Home1A", 15)
+animate_play("1883_003_Vis1AB_Home1A", 58)
 Collapse

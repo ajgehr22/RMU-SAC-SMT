@@ -85,5 +85,5 @@ animate_play <- function(game_id, play) {
 }
 
 # example play sequence
-animate_play("1883_003_Vis1AB_Home1A", 15)
+animate_play("1883_003_Vis1AB_Home1A", 58)
 Collapse
