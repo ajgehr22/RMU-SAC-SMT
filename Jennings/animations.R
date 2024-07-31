@@ -1,12 +1,14 @@
 ## Load relevant libraries
 library(tidyverse) # for data cleaning, wrangling, etc
-install.packages("sportyR")
+#install.packages("sportyR")
 library(sportyR) # for baseball field visualizations
 if(!require(gifski)) install.packages("gifski") # a helper package for gganimate
 library(gganimate) # to make the animated plot
 
 ## Import Data
 source("SMT_Data_starter.R")
+
+all_ss_plays <- read.csv("all_SS_plays.csv")
 
 ##  Write function to animate play sequences
 animate_play <- function(game_id, play) {
