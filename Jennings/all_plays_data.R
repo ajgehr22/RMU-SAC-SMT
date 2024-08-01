@@ -47,13 +47,7 @@ ball_pos_plays <- ball_pos_plays %>%
   filter(unique_id %in% ss_play_ids$unique_id)
 
 ## vector with ball positions
-ss_position <- ss_position |> 
-  mutate(unique_id = paste0(unique_id, "_", timestamp))
-
-ball_pos_plays <- ball_pos_plays |> 
-  mutate(unique_id = paste0(unique_id, "_", timestamp))
-
-all_plays <- ss_position %>% 
+all_ss_plays <- ss_position %>% 
   inner_join(ball_pos_plays, by = "unique_id")
 
 ## glimpse at all plays dataset
