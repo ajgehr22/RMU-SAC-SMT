@@ -8,6 +8,7 @@ ss_play_ids <- read.csv("Overall_SS_Involvement.csv")
 ## libraries
 library(tidyverse)
 library(sportyR)
+library(gganimate)
 
 ## get ball position data where SS could have reasonably got it
 # radius around the SS 
@@ -173,15 +174,9 @@ ss_track <- tracking_data |>
     ) |> 
   mutate(
     ball_x = ball_track$position_x,
-    ball_y = ball_track$position_y),
-    distance = dist(
-      c(field_x, field_y),
-      c(ball_x, ball_y))
+    ball_y = ball_track$position_y,
+    # euclidean distance
+    distance = sqrt((position_x - ball_x)^2 + (position_y - ball_y)^2)
     )
 
-ball_track <- tracking_data |> 
-  filter(
-    type == "ball"
-    )
-
-sqrt(sum((ss_track[,c("position_x", "position_y")] - ball_track[,c("position_x", "position_y")]) ^ 2))
+# can use the radius to filter plays and then use euclidean distance
