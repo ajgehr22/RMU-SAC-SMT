@@ -177,8 +177,7 @@ ss_track <- tracking_data |>
     ball_y = ball_track$position_y,
     # euclidean distance
     distance = sqrt((position_x - ball_x)^2 + (position_y - ball_y)^2),
-    batted_event = if_else(ball_y < 1, "batted", "travelling"),
-    fielded_event = if_else(distance < 1, "fielded", "travelling")
+    event = if_else(ball_y < 1, "batted", if_else(distance < 1, "fielded", "travelling"))
   )
 
 # can use the radius to filter plays and then use euclidean distance
