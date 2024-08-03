@@ -8,6 +8,7 @@ ss_play_ids <- read.csv("~/Desktop/Analytics Competitions:Research/SMT 2024/RMU_
 ## libraries
 library(tidyverse)
 library(sportyR)
+library(gganimate)
 
 ## get ball position data where SS could have reasonably got it
 # radius around the SS 
@@ -33,7 +34,7 @@ sportyR::geom_baseball(display_range = "infield", league = "MiLB") +
   geom_abline(aes(intercept = 0, slope = -1.9)) +
   geom_abline(aes(intercept = 0, slope = -30))
 
-all_SS_plays |> 
+all_ss_plays |> 
   filter(
     field_x <= 0 &
       ball_position_x <= 0
@@ -174,14 +175,10 @@ ss_track <- tracking_data |>
   mutate(
     ball_x = ball_track$position_x,
     ball_y = ball_track$position_y,
-distance = dist(
-  c(field_x, field_y),
-  c(ball_x, ball_y))
-)
-
-ball_track <- tracking_data |> 
-  filter(
-    type == "ball"
+    # euclidean distance
+    distance = sqrt((position_x - ball_x)^2 + (position_y - ball_y)^2),
+    batted_event = if_else(ball_y < 1, "batted", "travelling"),
+    fielded_event = if_else(distance < 1, "fielded", "travelling")
   )
 
-sqrt(sum((ss_track[,c("position_x", "position_y")] - ball_track[,c("position_x", "position_y")]) ^ 2))
+# can use the radius to filter plays and then use euclidean distance
