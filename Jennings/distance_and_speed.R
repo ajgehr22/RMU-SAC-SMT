@@ -130,12 +130,14 @@ ss_filters <- ss_track |>
   summarise(
     max_ball_y = max(ball_position_y),
     max_ball_z = max(ball_position_z),
-    avg_ball_x = mean(ball_position_x)
+    avg_ball_x = mean(ball_position_x),
+    max_pos_x = max(position_x)
   ) |> 
   filter(
     max_ball_y <= 165,
     max_ball_z <= 11,
-    avg_ball_x <= 0
+    avg_ball_x <= 0,
+    max_pos_x <= 4
     )
 
 # apply filters
