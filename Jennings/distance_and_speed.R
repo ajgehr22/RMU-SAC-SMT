@@ -127,7 +127,7 @@ ss_filters <- ss_track |>
   group_by(
     game_play_id
     ) |> 
-  mutate(
+  summarise(
     max_ball_y = max(ball_position_y),
     max_ball_z = max(ball_position_z)
   ) |> 
@@ -136,3 +136,6 @@ ss_filters <- ss_track |>
     max_ball_z <= 11
     )
 
+# apply filters
+ss_track_clean <- ss_track |> 
+  filter(game_play_id %in% ss_filters$game_play_id)
