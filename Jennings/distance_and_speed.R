@@ -139,7 +139,7 @@ ss_filters <- ss_track |>
     max_ball_z <= 11,
     avg_ball_x <= 0,
     max_pos_x <= 4,
-    min_ball_y >= -2
+    min_ball_y >= -1
     )
 
 # apply filters
