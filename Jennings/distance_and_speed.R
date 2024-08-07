@@ -119,8 +119,20 @@ test <- ss_track |>
   ) |> 
   drop_na(c(ball_position_x))
 
+# test reducing event column
+test_a <- ss_track |> 
+  filter(event == "fielded" | event == "not_fielded")
+
+eligible <- test_a |> 
+  filter(ball_position_x <= 0,
+         ball_position_y <= 165,
+         ball_position_z <= 11)
+
+ss_track_reduced <- ss_track |> 
+  filter(game_play_id %in% eligible$game_play_id)
+
 # filter for plays to SS
-ss_filters <- ss_track |> 
+ss_filters <- ss_track_reduced |> 
   mutate(
     game_play_id = paste0(game_id, "_", play_id)
     ) |> 
@@ -143,5 +155,66 @@ ss_filters <- ss_track |>
     )
 
 # apply filters
-ss_track_clean <- ss_track |> 
+ss_track_clean <- ss_track_reduced |> 
   filter(game_play_id %in% ss_filters$game_play_id)
+
+# test
+test |> 
+  mutate(
+    event = NA,
+    event = ifelse(any(min(ball_position_y)))
+  )
+
+## event column SUCKS 
+### 4669 occurrences of fielded or not fielded 
+### 266 frames that say batted (not all plays have a frame within 1 foot of plate, 
+#### sometimes even three feet)
+### there are 693 unique plays
+### maybe: figure out way to calculate distance traveled by SS until first(fielded or not fielded)
+#### and average it over SS ID
+
+test_b <- test |> 
+  mutate(
+    outcome = case_when(
+      min(ball_position_y) ~ "batted",
+      min(distance) ~ "fielded"
+    )
+  )
+
+
+# trying to see if euclidean distance can be had for the shortstop from when the ball was hit to when it was fielded
+batted_test <- ss_track_clean |> 
+  filter(event == "batted") |> 
+  filter(game_id == "1884_117_Vis4BA_Home4A") |> 
+  filter(play_id == "3") |> 
+  rename(start_position_x = position_x,
+         start_position_y = position_y)
+
+batted_test = subset(batted_test, select = c(1, 2, 5, 6))
+
+fielded_test <- ss_track_clean |> 
+  filter(event == "fielded") |> 
+  filter(game_id == "1884_117_Vis4BA_Home4A") |> 
+  filter(play_id == "3") |> 
+  rename(end_position_x = position_x,
+         end_position_y = position_y)
+
+fielded_test = subset(fielded_test, select = c(1, 2, 5, 6))
+
+distance_test <- batted_test |> 
+  inner_join(fielded_test, by = c("game_id", "play_id")) |> 
+  mutate(player_distance = sqrt((start_position_x - end_position_x)^2 + (start_position_y - end_position_y)^2))
+
+# test animation
+animate_play("1884_117_Vis4BA_Home4A", 3)
+
+#euclidean
+batted <- ss_track_clean |> 
+  filter(event == "batted") |> 
+  rename(start_position_x = position_x,
+         start_position_y = position_y)
+
+fielded <- ss_track_clean |> 
+  filter(event == "fielded")|> 
+  rename(end_position_x = position_x,
+         end_position_y = position_y)
