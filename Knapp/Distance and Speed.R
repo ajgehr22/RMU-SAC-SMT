@@ -160,13 +160,38 @@ ss_track_clean <- ss_track_reduced |>
   filter(game_play_id %in% ss_filters$game_play_id)
 
 # trying to see if euclidean distance can be had for the shortstop from when the ball was hit to when it was fielded
-distance_test <- ss_track_clean |> 
-  filter(event == "fielded" | event == "batted") |> 
+batted_test <- ss_track_clean |> 
+  filter(event == "batted") |> 
   filter(game_id == "1884_117_Vis4BA_Home4A") |> 
   filter(play_id == "3") |> 
-  mutate(player_distance =)
+  rename(start_position_x = position_x,
+         start_position_y = position_y)
+
+batted_test = subset(batted_test, select = c(1, 2, 5, 6))
+
+fielded_test <- ss_track_clean |> 
+  filter(event == "fielded") |> 
+  filter(game_id == "1884_117_Vis4BA_Home4A") |> 
+  filter(play_id == "3") |> 
+  rename(end_position_x = position_x,
+         end_position_y = position_y)
+
+fielded_test = subset(fielded_test, select = c(1, 2, 5, 6))
+
+distance_test <- batted_test |> 
+  inner_join(fielded_test, by = c("game_id", "play_id")) |> 
+  mutate(player_distance = sqrt((start_position_x - end_position_x)^2 + (start_position_y - end_position_y)^2))
 
 # test animation
 animate_play("1884_117_Vis4BA_Home4A", 3)
 
+#euclidean
+batted <- ss_track_clean |> 
+  filter(event == "batted") |> 
+  rename(start_position_x = position_x,
+         start_position_y = position_y)
 
+fielded <- ss_track_clean |> 
+  filter(event == "fielded")|> 
+  rename(end_position_x = position_x,
+         end_position_y = position_y)
